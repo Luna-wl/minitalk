@@ -18,13 +18,16 @@
 # define BR		"\x1B[41;1m"
 
 typedef struct s_client {
-	int	pid;
+	pid_t	pid;
+	char	*bit;
 }		t_client;
 
 typedef struct s_server {
-	int	pid;
+	pid_t	pid;
+	char	ch;
 }		t_server;
 
 t_client	g_client;
+t_server	g_server;
 
 #endif
