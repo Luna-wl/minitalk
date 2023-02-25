@@ -6,7 +6,7 @@
 /*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:52 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/25 17:26:23 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:52:11 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	send_msg(char *s)
 
 void	signal_handler(int signum)
 {
-	write(1, CYA"message sending success (~￣³￣)~\n"RESET, 43);
+	write(1, CYA"message sending success (~￣³￣)~\n"RESET, 37);
 }
 
 int	main(int ac, char **av)
