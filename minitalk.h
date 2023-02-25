@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/24 15:00:54 by wluedara          #+#    #+#             */
+/*   Updated: 2023/02/24 15:14:10 by wluedara         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINITALK_H
 # define MINITALK_H
 
@@ -19,12 +31,10 @@
 
 typedef struct s_client {
 	pid_t	pid;
-	char	*bit;
 }		t_client;
 
 typedef struct s_server {
 	pid_t	pid;
-	char	ch;
 }		t_server;
 
 t_client	g_client;

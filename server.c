@@ -6,7 +6,7 @@
 /*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:50 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/23 22:34:38 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:42:56 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,35 @@ void	put_num(int num)
 void	print_msg(int mode)
 {
 	static int	i = 0;
+	static int	ch = 0;
 
-	i++;
+	i += 1;
 	if (mode == 1)
 	{
-		g_server.ch += 1;
+		ch += 1;
 		if (i == 8)
 		{
-			write(1, &g_server.ch, 1);
-			g_server.ch = 0;
+			write(1, &ch, 1);
+			ch = 0;
 			i = 0;
 		}
 	}
 	else if (mode == 0)
 	{
-		g_server.ch += 0;
+		ch += 0;
 		if (i == 8)
 		{
-			write(1, &g_server.ch, 1);
-			g_server.ch = 0;
+			write(1, &ch, 1);
+			ch = 0;
 			i = 0;
 		}
 	}
-	g_server.ch <<= 1;
+	ch <<= 1;
 }
 
 void	sig_handler(int signum, siginfo_t *sa, void *old)
 {
 	(void)old;
-
 	if (signum == SIGUSR1)
 	{
 		print_msg(1);
@@ -64,7 +64,7 @@ void	sig_handler(int signum, siginfo_t *sa, void *old)
 	}
 }
 
-int	main()
+int	main(void)
 {
 	struct sigaction	sig;
 
@@ -73,7 +73,6 @@ int	main()
 	put_num(g_server.pid);
 	write(1, "\n", 1);
 	write(1, RESET, 5);
-	g_server.ch = 0;
 	sig.sa_flags = SA_SIGINFO;
 	sig.sa_sigaction = sig_handler;
 	sigemptyset(&sig.sa_mask);

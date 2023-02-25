@@ -6,73 +6,54 @@
 /*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:52 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/23 23:08:36 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:59:29 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-char	*c_to_bit(int c)
+void	error_sending(int mode)
 {
-	char	*bit;
-	int		i;
-
-	bit = malloc(8 + 1);
-	i = 8;
-	bit[i] = '\0';
-	while (--i > 0)
-	{
-		bit[i] = (c % 2) + '0';
-		c /= 2;
-	}
-	bit[i] = (c % 2) + '0';
-	return (bit);
+	if (mode == 1)
+		write(1, BLU"Error occurred during send SIGUSR1 (๏ᆺ๏υ)\n" RESET, 53);
+	else
+		write(1, CYA"Error occurred during send SIGUSR2 (●´⌓`●)\n" RESET, 54);
+	exit(EXIT_FAILURE);
 }
 
-void	send_ch(char *bit)
+void	int_to_bit(int c)
 {
-	while (*bit)
+	int	i;
+	int	bit;
+
+	i = 8;
+	while (i-- > 0)
 	{
-		if (*bit == '1')
+		bit = c >> i;
+		if (bit & 1)
 		{
 			if (kill(g_client.pid, SIGUSR1) != 0)
-			{
-				write(1, BLU"Error occurred during send SIGUSR1 (๏ᆺ๏υ)\n" \
-				RESET, 53);
-				exit(EXIT_FAILURE);
-			}
+				error_sending(1);
 		}
-		else if (*bit == '0')
+		else
 		{
 			if (kill(g_client.pid, SIGUSR2) != 0)
-			{
-				write(1, CYA"Error occurred during send SIGUSR2 (●´⌓`●)\n" \
-				RESET, 54);
-				exit(EXIT_FAILURE);
-			}
+				error_sending(0);
 		}
-		usleep(500);
-		bit++;
+		usleep(50);
 	}
 }
 
 void	send_msg(char *s)
 {
-	char	*bit;
-
 	while (*s)
 	{
-		bit = c_to_bit(*s);
-		send_ch(bit);
-		free(bit);
+		int_to_bit(*s);
 		s++;
 	}
-	bit = c_to_bit(*s);
-	send_ch(bit);
-	free(bit);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	struct sigaction	sig;
 
@@ -91,6 +72,7 @@ int main(int ac, char **av)
 		write(1, YEL"You shouldn't do this! (⌐■_■)\n"RESET, 41);
 		exit(EXIT_FAILURE);
 	}
+	sigaction(SIGUSR1, &sig, NULL);
 	send_msg(av[2]);
 	return (0);
 }
