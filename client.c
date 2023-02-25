@@ -6,7 +6,7 @@
 /*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:52 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/25 17:52:11 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:55:28 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	int_to_bit(int c)
 			if (kill(g_client.pid, SIGUSR2) != 0)
 				error_sending(0);
 		}
-		usleep(50);
+		usleep(100);
 	}
 }
 
@@ -56,7 +56,7 @@ void	send_msg(char *s)
 
 void	signal_handler(int signum)
 {
-	write(1, CYA"message sending success (~￣³￣)~\n"RESET, 37);
+	write(1, CYA"message sending success (~￣³￣)~\n"RESET, 43);
 }
 
 int	main(int ac, char **av)
