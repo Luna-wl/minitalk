@@ -6,7 +6,7 @@
 /*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:52 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/24 14:59:29 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:26:23 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,16 @@ void	send_msg(char *s)
 		int_to_bit(*s);
 		s++;
 	}
+	int_to_bit(*s);
+}
+
+void	signal_handler(int signum)
+{
+	write(1, CYA"message sending success (~￣³￣)~\n"RESET, 43);
 }
 
 int	main(int ac, char **av)
 {
-	struct sigaction	sig;
-
 	if (ac != 3)
 	{
 		write(1, RED"You put wrong input ⊙▂⊙\n"RESET, 35);
@@ -72,7 +76,7 @@ int	main(int ac, char **av)
 		write(1, YEL"You shouldn't do this! (⌐■_■)\n"RESET, 41);
 		exit(EXIT_FAILURE);
 	}
-	sigaction(SIGUSR1, &sig, NULL);
+	signal(SIGUSR1, signal_handler);
 	send_msg(av[2]);
 	return (0);
 }

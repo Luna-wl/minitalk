@@ -6,7 +6,7 @@
 /*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:50 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/24 14:42:56 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/25 17:20:26 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ void	put_num(int num)
 	write(1, &n, 1);
 }
 
+void	reset_value(int ch)
+{
+	if (ch == 0)
+		kill(g_client.pid, SIGUSR1);
+	write(1, &ch, 1);
+}
+
 void	print_msg(int mode)
 {
 	static int	i = 0;
@@ -33,7 +40,7 @@ void	print_msg(int mode)
 		ch += 1;
 		if (i == 8)
 		{
-			write(1, &ch, 1);
+			reset_value(ch);
 			ch = 0;
 			i = 0;
 		}
@@ -43,7 +50,7 @@ void	print_msg(int mode)
 		ch += 0;
 		if (i == 8)
 		{
-			write(1, &ch, 1);
+			reset_value(ch);
 			ch = 0;
 			i = 0;
 		}
@@ -54,6 +61,7 @@ void	print_msg(int mode)
 void	sig_handler(int signum, siginfo_t *sa, void *old)
 {
 	(void)old;
+	g_client.pid = sa->si_pid;
 	if (signum == SIGUSR1)
 	{
 		print_msg(1);
