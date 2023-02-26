@@ -6,7 +6,7 @@
 /*   By: wluedara <Warintorn_L@outlook.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:52 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/26 14:35:20 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:43:48 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	int_to_bit(int c)
 			if (kill(g_client.pid, SIGUSR2) != 0)
 				error_sending(0);
 		}
-		usleep(100);
+		usleep(50);
 	}
 }
 

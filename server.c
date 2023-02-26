@@ -6,7 +6,7 @@
 /*   By: wluedara <Warintorn_L@outlook.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:50 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/26 14:35:54 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:43:35 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,14 @@ void	print_msg(int mode)
 
 	i += 1;
 	if (mode == 1)
-	{
 		ch += 1;
-		if (i == 8)
-		{
-			reset_value(ch);
-			ch = 0;
-			i = 0;
-		}
-	}
 	else if (mode == 0)
-	{
 		ch += 0;
-		if (i == 8)
-		{
-			reset_value(ch);
-			ch = 0;
-			i = 0;
-		}
+	if (i == 8)
+	{
+		reset_value(ch);
+		ch = 0;
+		i = 0;
 	}
 	ch <<= 1;
 }
