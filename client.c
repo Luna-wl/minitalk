@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wluedara <Warintorn_L@outlook.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:52 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/25 17:55:28 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/26 14:35:20 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	error_sending(int mode)
 {
 	if (mode == 1)
-		write(1, BLU"Error occurred during send SIGUSR1 (๏ᆺ๏υ)\n" RESET, 53);
+		ft_putstr_fd(BLU"Error occurred during send SIGUSR1 (๏ᆺ๏υ)\n"RESET, 2);
 	else
-		write(1, CYA"Error occurred during send SIGUSR2 (●´⌓`●)\n" RESET, 54);
+		ft_putstr_fd(CYA"Error occurred during send SIGUSR2 (●´⌓`●)\n"RESET, 2);
 	exit(EXIT_FAILURE);
 }
 
@@ -56,14 +56,14 @@ void	send_msg(char *s)
 
 void	signal_handler(int signum)
 {
-	write(1, CYA"message sending success (~￣³￣)~\n"RESET, 43);
+	ft_putstr_fd(CYA"message sending success (~￣³￣)~\n"RESET, 2);
 }
 
 int	main(int ac, char **av)
 {
 	if (ac != 3)
 	{
-		write(1, RED"You put wrong input ⊙▂⊙\n"RESET, 35);
+		ft_putstr_fd(RED"You put wrong input ⊙▂⊙\n"RESET, 2);
 		exit(EXIT_FAILURE);
 	}
 	while (*av[1] >= '0' && *av[1] <= '9')
@@ -73,7 +73,7 @@ int	main(int ac, char **av)
 	}
 	if (g_client.pid <= 0)
 	{
-		write(1, YEL"You shouldn't do this! (⌐■_■)\n"RESET, 41);
+		ft_putstr_fd(YEL"You shouldn't do this! (⌐■_■)\n"RESET, 2);
 		exit(EXIT_FAILURE);
 	}
 	signal(SIGUSR1, signal_handler);

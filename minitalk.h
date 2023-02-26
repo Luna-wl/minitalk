@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wluedara <Warintorn_L@outlook.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 15:00:54 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/24 15:14:10 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/26 14:32:52 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ typedef struct s_server {
 
 t_client	g_client;
 t_server	g_server;
+
+void	ft_putstr_fd(char *s, int fd);
+int		ft_strlen(char *s);
 
 #endif

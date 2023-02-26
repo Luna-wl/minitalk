@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wluedara <wluedara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wluedara <Warintorn_L@outlook.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 15:18:50 by wluedara          #+#    #+#             */
-/*   Updated: 2023/02/25 17:20:26 by wluedara         ###   ########.fr       */
+/*   Updated: 2023/02/26 14:35:54 by wluedara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,14 @@ void	put_num(int num)
 void	reset_value(int ch)
 {
 	if (ch == 0)
-		kill(g_client.pid, SIGUSR1);
+	{
+		if (kill(g_client.pid, SIGUSR1) != 0)
+		{
+			ft_putstr_fd(BLU"Something went wrong while receive message \
+			¯\\_(ツ)_/¯\n"RESET, 2);
+			exit(EXIT_FAILURE);
+		}
+	}
 	write(1, &ch, 1);
 }
 
